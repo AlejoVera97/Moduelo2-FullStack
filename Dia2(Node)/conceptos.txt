@@ -1,0 +1,45 @@
+-Funcion: siempre que este en ejecucion las variables son recrodadas, clausuradas cdentro de la funcion.
+
+-Hosting: JS mueve las varaibles al incio de su scope.
+
+-Scope de bloque : let/const --> {}
+Ejemplo:
+if(x){
+    let a=23; --> Solo existe dentro del IF
+}
+
+
+----------------------
+Agenda:
+1) JS lenguaje multiproposito.
+2) Backend.
+3) Frameworks ---> express (JS para construir backend)
+4) Programacion oriendata a objetos - expresiones regulares.
+5) react (frameworks Frontend JS)
+6) Bases de datos ( postgresSQL, MongoBD)
+
+----------------------
+
+
+1) JS lenguaje multiproposito.
+Runtime (entorno de ejecucion)
+Node--> entorno de ejecucion de JS.
+
+
+----------------------------
+
+Variables/Constanstes
+Condiciones
+Bucles
+Funciones
+Sistema de ficheros
+
+
+-----------------
+
+Node
+Cada fichero de JS en ejucion es un MODULO --> es un objeto  que representa el fichero
+
+module..exports --> {tengo un objeto con las funciones a exportar}
+
+requiere("ruta al fichero");
