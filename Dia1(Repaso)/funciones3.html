@@ -30,11 +30,22 @@
         const items = document.querySelectorAll("li");
         const cuadro=document.querySelector(".cuadro");
 
-        for (let i = 0 ; i<items.length; i++){
-            items[i].addEventListener("click",()=>{
-                cuadro.style.backgroundColor= items[i].innerText;
+        /*
+        for (var i = 0 ; i<items.length; i++){
+            (function(i){
+                items[i].addEventListener("click",()=>{
+                    console.log(i);
+                    cuadro.style.backgroundColor= items[i].innerText;
             });
+            })(i);// funcion invocada indmediantamente 
         }
+        */
+        items.forEach(item=>{
+            item.addEventListener("click",()=>{
+                cuadro.style.backgroundColor= item.innerText;
+            });
+        })
+
 
 
 
