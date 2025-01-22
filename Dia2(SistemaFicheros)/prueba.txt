@@ -1,10 +1,3 @@
-Sistema de ficheros --> FS( file system)
-Es un modelo nativo de node.
-
-ReadFile y WriteFile. (unicas dos funciones que vamos a aprender)
- 
- ReadFile --> precisa la ruta al fichero y el callback.
-
- CallBack --> recibe el error y el contenido.
- ReadFile --> Ruta al fichero, datos a escribir , callback
- callback --> error.
+hola
+salir
+salir
