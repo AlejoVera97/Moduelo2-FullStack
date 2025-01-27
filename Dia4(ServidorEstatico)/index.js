@@ -28,7 +28,7 @@ const servidor = createServer ((peticion,respuesta)=>{
         stat(ruta,(error,informacion)=>{
             if(!error && informacion.isFile()){
                 let extension =ruta.split(".").pop();
-                servirFichero(respuesta,ruta,extension);
+                servirFichero(respuesta,ruta,contentType(extension));
             }else{
                 servirFichero(respuesta,"./404.html",contentType("html"),404);
             }
