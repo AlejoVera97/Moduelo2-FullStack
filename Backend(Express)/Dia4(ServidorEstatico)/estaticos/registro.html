@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul></ul>
+    <form action="/registrar" method="post">
+        <input type="text" name="nombre">
+        <input type="submit" value="registrar">
+    </form>
+
+
+    <script>
+
+        const lista = document.querySelector("ul");
+
+        function li(texto) {
+            let li = document.createElement("li");
+            li.innerHTML = texto;
+            return li;
+        }
+
+        fetch("/nombres")
+            .then(respuesta => respuesta.json())
+            .then(nombres => {
+                if (nombres.length > 0) {
+                    nombres.forEach(nombre => lista.appendChild(li(nombre)));
+                } else {
+                    lista.appendChild(li("no hay personas registradas"));
+                }
+            });
+
+
+    </script>
+</body>
+
+</html>
