@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2> Estudiantes: </h2>
+    <ul></ul>
+
+    <form>
+        <input type="text" placeholder="nombre">
+        <input type="submit" value="guardar">
+    </form>
+
+    <script>
+
+        const lista = document.querySelector("ul");
+        const formulario= document.querySelector("form");
+        const input =document.querySelector('input[type="text"]');
+
+        function li(id, nombre) {
+            let li = document.createElement("li");
+            li.innerHTML = nombre;
+            return li;
+        }
+
+        fetch("/estudiantes")
+            .then(respuesta => respuesta.json())
+            .then(estudiantes => {
+                console.log(estudiantes);
+
+                estudiantes.forEach(({ id, nombre }) => {
+                    lista.appendChild(li(id, nombre));
+                });
+            });
+
+        formulario.addEventListener("submit",evento=>{
+            evento.preventDefault();
+
+            let nombre = input.value;
+
+            fetch("/estudiantes/nuevo",{
+                method: "POST",
+                body : JSON.stringify({nombre}),
+                headers : {
+                    "Content-type":"application/json"
+                }
+            })
+            .then(respuesta => respuesta.json())
+            .then(({id})=>{
+                lista.appendChild(li(id,nombre));
+                input.value="";
+            });
+            
+        });
+
+    </script>
+
+</body>
+
+</html>
