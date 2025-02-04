@@ -19,44 +19,57 @@
     <script>
 
         const lista = document.querySelector("ul");
-        const formulario= document.querySelector("form");
-        const input =document.querySelector('input[type="text"]');
+        const formulario = document.querySelector("form");
+        const input = document.querySelector('input[type="text"]');
 
         function li(id, nombre) {
-            let li = document.createElement("li");
-            li.innerHTML = nombre;
-            return li;
-        }
+    let li = document.createElement("li");
+    li.innerHTML = nombre;
+
+    li.addEventListener("click", () => {
+        fetch("/estudiantes/borrar/"+id, {
+            method: "DELETE", 
+        })
+        .then(respuesta => {
+            if(respuesta.status == 204){
+                li.remove();
+            }
+        })
+        
+    });
+
+    return li;
+}
 
         fetch("/estudiantes")
-            .then(respuesta => respuesta.json())
-            .then(estudiantes => {
-                console.log(estudiantes);
+                    .then(respuesta => respuesta.json())
+                    .then(estudiantes => {
+                        console.log(estudiantes);
 
-                estudiantes.forEach(({ id, nombre }) => {
-                    lista.appendChild(li(id, nombre));
-                });
+                        estudiantes.forEach(({ id, nombre }) => {
+                            lista.appendChild(li(id, nombre));
+                        });
+                    });
+
+            formulario.addEventListener("submit", evento => {
+                evento.preventDefault();
+
+                let nombre = input.value;
+
+                fetch("/estudiantes/nuevo", {
+                    method: "POST",
+                    body: JSON.stringify({ nombre }),
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                    .then(respuesta => respuesta.json())
+                    .then(({ id }) => {
+                        lista.appendChild(li(id, nombre));
+                        input.value = "";
+                    });
+
             });
-
-        formulario.addEventListener("submit",evento=>{
-            evento.preventDefault();
-
-            let nombre = input.value;
-
-            fetch("/estudiantes/nuevo",{
-                method: "POST",
-                body : JSON.stringify({nombre}),
-                headers : {
-                    "Content-type":"application/json"
-                }
-            })
-            .then(respuesta => respuesta.json())
-            .then(({id})=>{
-                lista.appendChild(li(id,nombre));
-                input.value="";
-            });
-            
-        });
 
     </script>
 

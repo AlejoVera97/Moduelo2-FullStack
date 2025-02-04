@@ -12,7 +12,6 @@ const servidor = express();
 
 servidor.use(express.json());
 
-
 servidor.use(express.static("./public"));
 
 servidor.get ("/estudiantes", (peticion,respuesta)=>{
@@ -29,6 +28,16 @@ servidor.post("/estudiantes/nuevo",(peticion,respuesta)=>{
 
     respuesta.json({id});
 
+});
+
+servidor.delete("/estudiantes/borrar/:id",(peticion,respuesta)=>{
+    let cantidadPre = estudiantes.length;
+
+    estudiantes= estudiantes.filter(estudiante => estudiante.id !=Number(peticion.params.id));
+
+    respuesta.status(cantidadPre == estudiantes.length ? 404: 204);
+
+    respuesta.end();
 });
 
 servidor.use((error,peticion,respuesta,siguiente)=>{
