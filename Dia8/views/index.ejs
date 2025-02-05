@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <ul>
+        <% if(estudiantes.lenght > 0){ %>
+            <% for(let i = 0; i<estudiantes.lenght; i++){ %>
+                <li><a href="/borrar/<%= estudiantes[i].id%>"><%= estudiantes[i].nombre %> </a></li>
+            <% } %>
+        <% } else { %>
+            <li> No hay estudiantes registrados </li>
+        <% }%>
+
+    </ul>
+
+    <form action="/crear" method=" POST">
+        <input type="text" name="nombre">
+        <input type="submit" value="anadir">
+    </form>
+
+    
+</body>
+</html>
