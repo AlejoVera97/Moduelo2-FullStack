@@ -1,15 +1,27 @@
 import express from " express";
-import { readFile } from "fs";
+import { readFile, writeFile } from "fs";
 
 let estudiantes = [];
 
-readFile("./datos", (error, contenido) => {
+readFile("./datos.txt", (error, contenido) => {
     if (error) {
         return process.exit();
     }
     estudiantes = JSON.parse(contenido.toString());
-    console.log(estudiantes);
 });
+
+function actualizarDatos(){
+    return new Promise((ok,ko)=>{
+            writeFile("./datos.txt",JSON.stringify(estudiantes),error =>{
+                if(!error){
+                    return ok();
+                }
+                ko(error);
+            });
+    });
+}
+
+
 
 const servidor = express();
 
@@ -25,27 +37,40 @@ servidor.get("/", (peticion, respuesta) => {
 
 servidor.get("/color", (peticion, respuesta) => {
     let color = `rgb(${[0, 0, 0].map(() => Math.floor(Math.random() * 256)).join(",")})`;
-
     respuesta.render("prueba", { color });
 });
 
-servidor.post("/crear", (peticion, respuesta) => {
+servidor.post("/crear", async (peticion, respuesta) => {
     let { nombre } = peticion.body;
 
     let id = Math.floor(Math.random() * 5000);
 
     estudiantes.push({ id, nombre });
 
+    try{
+        await actualizarDatos();
+        respuesta.redirect("/");
+    }catch(error){
+        respuesta.status(500);
+        respuesta.render("error");
+    }
+
     respuesta.redirect("/");
 });
 
-servidor.get("/borrar/:id", (peticion, respuesta) => {
+servidor.get("/borrar/:id", async (peticion, respuesta) => {
 
     let id = Number(peticion.params.id);
 
     estudiantes = estudiantes.filter(estudiante => estudiante.id != id);
 
-    respuesta.redirect("/");
+    try{
+        await actualizarDatos();
+        respuesta.redirect("/");
+    }catch(error){
+        respuesta.status(500);
+        respuesta.render("error");
+    }
 });
 
 
