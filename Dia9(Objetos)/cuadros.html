@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .cuadros{
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .cuadro{
+            border: 1px solid black;
+            margin: 20px;
+
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="text" placeholder="ancho">
+        <input type="text" placeholder="alto">
+        <input type="submit" value="crear cuadro">
+    </form>
+ 
+    <section class="cuadros"></section>
+
+    <script>
+        const boton = document.querySelector("button");
+        const contendor = querySelector(".cuadros");
+
+        class Cuadro{
+            constructor(ancho,alto,elementoContenedor){
+                this.ancho = ancho;
+                this.alto = alto;
+                this.DOM= null;
+                this.crearDOM(elementoContenedor);
+            }
+            crearDOM(contendor){
+                this.DOM = document.createElement("div");
+                this.DOM.classList.add("cuadro");
+                this.DOM.style.width= this.amcho+"px";
+                this.DOM.style.height=this.alto+"px";
+                this.DOM.style.backgroundColor = this.generarColor();
+                contendor.appendChild(this.DOM);
+            }
+
+            elimnar(){
+
+            }
+
+            generarColor(){
+                return `rgb(${[0, 0, 0].map(() => Math.floor(Math.random() * 256)).join(",")})`;
+            }
+        }
+
+
+        formulario.addEventListener("submit",evento =>{
+            evento.preventDefault();
+            new Cuadro(234,34,contendor);
+        });
+
+    </script>
+</body>
+</html>
