@@ -25,7 +25,7 @@ class Tarea{
         botonBorrar.classList.add("boton");
         botonBorrar.innerText="borrar";
 
-        botonBorrar.addEventListener("click", function(){
+        botonBorrar.addEventListener("click", ()=>{
             
             //this.borrarTarea();
         });
