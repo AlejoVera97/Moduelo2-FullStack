@@ -3,6 +3,7 @@ class Tarea{
         this.id =id;
         this.texto=texto;
         this.DOM=null;
+        this.editando = false;
         this.crearTarea(estado,contenedor);
     }
     crearTarea(estado,contenedor){
@@ -19,20 +20,26 @@ class Tarea{
 
         let botonEditar=document.createElement("button");
         botonEditar.classList.add("boton");
-        botonEditar.innerText="editrar";
+        botonEditar.innerText="editar";
+
+        botonEditar.addEventListener("click",()=>this.actulizarEstado());
  
         let botonBorrar=document.createElement("button");
         botonBorrar.classList.add("boton");
         botonBorrar.innerText="borrar";
 
         botonBorrar.addEventListener("click", ()=>{
-            
-            //this.borrarTarea();
+            this.borrarTarea();
         });
 
         let botonEstado = document.createElement("button");
         botonEstado.className= `estado ${ estado ? "terminada" : ""}`;
         botonEstado.appendChild(document.createElement("span"));
+
+        botonEstado.addEventListener("click",()=>{
+            this.actulizarEstado()
+            .then(()=>botonEstado.classList.toggle("terminada"));
+        });
 
         this.DOM.appendChild(textoTarea);
         this.DOM.appendChild(editorTarea);
@@ -44,5 +51,31 @@ class Tarea{
 
     borrarTarea(){
         this.DOM.remove();
+    }
+
+    actulizarEstado(){
+        return new Promise((ok,ko)=>{
+            ok();
+        });
+    }
+    actulizarTexto(){
+        if(this.editando){
+            let textoTemporal= this.DOM.children[1].value.trim();
+            
+            if(textoTemporal!= "" && textoTemporal != this.texto){
+                this.texto = textoTemporal;
+            }
+
+            this.DOM.children[1].classList.remove("visible");
+            this.DOM.children[0].innerText=this.texto;
+            this.DOM.children[0].classList.add("visible");
+            this.DOM.children[2].innerText = "editar";
+        }else{
+            this.DOM.children[0].classList.remove("visible");
+            this.DOM.children[1].value=this.texto;
+            this.DOM.children[1].classList.add("visible");
+            this.DOM.children[2].innerText = "guardar";
+        }
+        this.editando= !this.editando;
     }
 }

@@ -2,6 +2,11 @@ const tareas=document.querySelector(".tarea");
 const formulario=document.querySelector("form");
 const inputTexto=document.querySelector(`form input[type="text"]`)
 
+
+
+
+
+
 formulario.addEventListener("submit",evento =>{
     evento.defaultPrevented();
 
