@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .resaltado{
+        background-color: yellow;
+        font-weight: bold;
+    }
+</style>
+
+</head>
+<body>
+
+    <input type="text">
+    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita officia placeat numquam, eligendi reiciendis animi, qui ad doloremque totam voluptatem enim officiis dolore facilis nihil impedit velit non fuga quas!</p>
+    
+
+    <script>
+
+        const input = document.querySelector("input");
+        const parrafo = document.querySelector("p");
+        let textoOriginal=parrafo.innerText;
+
+        input.addEventListener("input", ()=>{
+            let exp = new RegExp(input.value,"ig");
+            
+            parrafo.innerHTML= textoOriginal.replace(exp,match =>{
+                return `<span class="resaltado">${match}</span>`;
+            });
+        });
+
+    </script>
+</body>
+</html>

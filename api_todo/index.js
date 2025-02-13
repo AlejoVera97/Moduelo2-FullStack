@@ -16,15 +16,15 @@ servidor.post("/tareas/nuevas",(peticion,respuesta)=>{
     respuesta.send("POST /tareas/nueva");
 });
 
-servidor.delete("/tareas/nuevas",(peticion,respuesta)=>{
+servidor.delete("/tareas/borrar/:id([0-9]+)",(peticion,respuesta)=>{
     respuesta.send("DELETE /tareas/borrar/:id");
 });
 
-servidor.put("/tareas/editar/texto/:id",(peticion,respuesta)=>{
+servidor.put("/tareas/editar/texto/:id([0-9]+)",(peticion,respuesta)=>{
     respuesta.send("PUT /tareas/editar/texto/:id" );
 });
 
-servidor.put("/tareas/editar/estado/:id",(peticion,respuesta)=>{
+servidor.put("/tareas/editar/estado/:id([0-9]+)",(peticion,respuesta)=>{
     respuesta.send("PUT /tareas/editar/estado/:id");
 });
 
