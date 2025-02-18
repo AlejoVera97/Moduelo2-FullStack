@@ -9,8 +9,8 @@ const conexion = postgres({
     password: "admin"
 });
 
-conexion`UPDATE colores SET r=0, g=100 WHERE id=2`
-.then(resultado => console.log (resultado))
+conexion`UPDATE colores SET r=0, g=100 WHERE id=6`
+.then(resultado => console.log (resultado.count))
 .catch(error=> console.log(error))
 .finally(()=> {
     console.log("..finally");
