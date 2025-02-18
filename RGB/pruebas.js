@@ -1,4 +1,4 @@
-import { leerColores,crearColor} from "./db";
+import { leerColores,crearColor,borrarColor} from "./db";
 
 /*
 leerColores()
@@ -6,7 +6,14 @@ leerColores()
 .catch(x=> console.log(x));
 */
 
-
-crearColores({r:234, g:190 , b:200})
+/*
+crearColor({r:234, g:190 , b:200})
 .then(x=> console.log(x))
 .catch(x=> console.log(x));
+*/
+
+/*
+borrarColor(8)
+.then(x=> console.log(x))
+.catch(x=> console.log(x));
+*/

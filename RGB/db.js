@@ -30,9 +30,25 @@ export function crearColor({r,g,b}){
         const  conexion = conectar();
 
         conexion`INSERT INTO colores (r,g,b) VALUES (${r}, ${g},${b}) RETURNING id`
-        .then (resultado=>{
+        .then (([{id}])=>{
             conexion.end();
-            ok(resultado);
+            ok(id);
+        })
+        .catch(error=>{
+            ko({error: " eror en la base de datos"});
+        });
+
+    });
+}
+
+export function borrarColor(id){
+    return new Promise((ok,ko)=>{
+        const  conexion = conectar();
+
+        conexion`DELETE FROM colores WHERE id= ${id}`
+        .then (({count})=>{
+            conexion.end();
+            ok(count);
         })
         .catch(error=>{
             ko({error: " eror en la base de datos"});
