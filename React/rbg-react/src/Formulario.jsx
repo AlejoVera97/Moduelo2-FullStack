@@ -25,7 +25,9 @@ function Formulario(crearColor) {
 
           let [r, g, b] = valores
 
-          return crearColor ({id: Math.random(),r,g,b})
+           crearColor ({id: Math.random(),r,g,b})
+
+           return setTextoInput("")
         }
       }
 
