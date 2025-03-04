@@ -1,5 +1,5 @@
-function Item ({r,g,b}){
+function Item ({id,r,g,b,borrarColor}){
     
-    return <li style={{ backgroundColor: `rgb(${[r, g, b].join(",")})` }}>{r},{g},{b}</li>;
+    return <li onClick={()=>borrarColor(id)} style={{ backgroundColor: `rgb(${[r, g, b].join(",")})` }}>{r},{g},{b}</li>;
 }
 export default Item
