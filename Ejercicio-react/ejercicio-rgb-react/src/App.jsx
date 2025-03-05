@@ -1,29 +1,33 @@
 import { useState } from 'react'
-
+import Formulario from './Formulario'
+import Item from './Item'
 
 function App() {
-  let [rojo, setRojo] = useState(0)
-  let [verde, setVerde] = useState(0)
-  let [azul, setAzul] = useState(0)
+
+  let [colores,setColores] = useState([])
+
+  function crearColor(color){
+    setColores([...colores,color])
+  }
+
+  function borrarColor(id){
+    setColores(colores.filter( color => color.id != id ))
+  }
 
   return (
-    <section class="contenedor">
-      <div
-        className="color"
-        style={{ backgroundColor: `rgb(${rojo},${verde},${azul})` }}
-      ></div>
-
-      {[setRojo, setVerde, setAzul].map((setColor, i) => (
-        <input
-          key={i}
-          type="range"
-          min="0"
-          max="255"
-          onChange={evento => setColor(evento.target.value)}
-        />
-      ))}
-
-    </section>
+    <>
+      <Formulario crearColor={crearColor} />
+      <ul>
+        { colores.map( ({id,r,g,b}) => <Item 
+                                          key={id} 
+                                          id={id} 
+                                          r={r} 
+                                          g={g} 
+                                          b={b} 
+                                          borrarColor={borrarColor}  
+                                        /> ) }
+      </ul>
+    </>
   )
 }
 

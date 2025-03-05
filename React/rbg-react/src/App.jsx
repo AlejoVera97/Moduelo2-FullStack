@@ -1,10 +1,16 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import Formulario  from "./Formulario"
 import Item from './Item'
 
 function App(){
 
     let [colores,setColores] = useState([]) 
+
+useEffect(()=>{
+    fetch("http://localhost:4000/colores")
+    .then(respuesta => respuesta.json())
+    .then(respuesta =>setColores(colores))
+},[])
 
     function crearColor(color){
         setColores([...colores,color])

@@ -1,8 +1,10 @@
 import express from "express";
+import cors from "cors";
 import { leerColores, crearColor, borrarColor } from "./db.ks"
 
 const servidor = express();
 
+servidor.use(cors());
 servidor.use(express.json());
 
 servidor.use(express.static("./estaticos"));
