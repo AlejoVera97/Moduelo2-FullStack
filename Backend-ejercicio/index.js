@@ -16,16 +16,15 @@ function esPangrama(frase){
 const servidor = express();
 
 
-servidor.use("",express.static("./pruebas"))
+servidor.use("/pruebas",express.static("./pruebas"));
 
-servidor.post("/nueva/frase",(peticion,respuesta)=>{
+servidor.post("/nueva/frase",(peticion,respuesta,siguiente)=>{
     
     let{frase} = peticion.body;
 
     if(!frase || frase.trim() == ""){
         return siguiente(true);
     }
-    
     
     respuesta.json({respuesta:esPangrama(frase)});
 });
@@ -37,7 +36,7 @@ servidor.use((error,peticion,respuesta,siguiente)=>{
 
 servidor.use((peticion,respuesta)=>{
     respuesta.status(404);
-    respuesta.json({error: " recuerso no encontrado"});
+    respuesta.json({error: " recurso no encontrado"});
 })
 
-servidor.listen(4000);
+servidor.listen(3000);
