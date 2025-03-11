@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul></ul>
+
+    <script>
+
+         const lista = document.querySelector("ul");
+
+         fetch("/estudiantes")
+         .then(respuesta => respuesta.json())
+         
+         .then(estudiantes =>{
+            estudiantes.forEach(({nombre,edad,aula})=>{
+                item.innerText = `${nombre}, edad: ${edad} ,aula: ${edad}`;
+                lista.appendChild(item);
+            });
+         });
+    </script>
+</body>
+</html>
