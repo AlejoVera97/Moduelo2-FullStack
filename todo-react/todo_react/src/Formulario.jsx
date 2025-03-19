@@ -1,19 +1,22 @@
 import { useState } from "react";
+import Tarea from "./Tarea";
 
-function Formulario() {
-  
+function Formulario({ crearTarea }) {
+  let [textoInput, setTextoInput] = useState("")
+
 
   return (
-    <form onSubmit={manejarSubmit}>
-      <input
-        type="text"
-        placeholder="¿Qué hay que hacer?"
-        value={tarea}
-        onChange={(e) => setTarea(e.target.value)}
-      />
-      <input type="submit" value="Crear tarea" />
-    </form>
-  );
+    <frorm onSubmit={evento => {
+      evento.preventDefault()
+      if (textoInput.trim() != "") {
+        crearTarea({ id: Math.random() * 4000, tarea: "hola", estado: false })
+      }
+    }}
+    >
+      <input type="text" placeholder="que hay que hacer?" value={textoInput} onChange={evento => setTextoInput(evento.target.value)} />
+      <input type="submit" value="crear tarea" />
+    </frorm>
+  )
 }
 
 export default Formulario;
